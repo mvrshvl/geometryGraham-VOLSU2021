@@ -34,8 +34,8 @@ def showPlot(points, grahamIndexes, title):
     plt.savefig('demo.png', bbox_inches='tight')
 
 
-def rotate(A, B, C):  # On which side is the point C relative to AB
-    return (B[0] - A[0]) * (C[1] - B[1]) - (B[1] - A[1]) * (C[0] - B[0])
+def isLeft(a, b, point):  # On which side is the point C relative to AB
+    return (b[0] - a[0]) * (point[1] - b[1]) - (b[1] - a[1]) * (point[0] - b[0])
 
 
 def scan(points):
@@ -50,13 +50,13 @@ def scan(points):
     # sort
     base = pointsNum[0]
     del pointsNum[0]
-    pointsNum.sort(key=functools.cmp_to_key(lambda x, y: rotate(points[base], points[y], points[x])))
+    pointsNum.sort(key=functools.cmp_to_key(lambda x, y: isLeft(points[base], points[y], points[x])))
     pointsNum.insert(0, base)
 
     # look at the angles and cut them
     S = [pointsNum[0], pointsNum[1]]
     for i in range(2, lengthPoints):
-        while rotate(points[S[-2]], points[S[-1]], points[pointsNum[i]]) < 0:
+        while isLeft(points[S[-2]], points[S[-1]], points[pointsNum[i]]) < 0:
             del S[-1]
         S.append(pointsNum[i])
     return S
