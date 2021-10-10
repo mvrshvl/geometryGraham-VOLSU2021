@@ -18,7 +18,6 @@ def generatePoints():
 
 
 def showPlot(points, grahamIndexes, title):
-    idx = 0
     for p in points:
         plt.scatter(p[0], p[1], color="red")
 
