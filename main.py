@@ -34,7 +34,7 @@ def showPlot(points, grahamIndexes, title):
     plt.savefig('demo.png', bbox_inches='tight')
 
 
-def isLeft(a, b, point):  # On which side is the point C relative to AB
+def isLeft(a, b, point):  # On which side is the point relative to AB
     return (b[0] - a[0]) * (point[1] - b[1]) - (b[1] - a[1]) * (point[0] - b[0])
 
 
